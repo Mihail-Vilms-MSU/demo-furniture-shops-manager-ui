@@ -1,0 +1,57 @@
+<script src="../model/shops.ts"></script>
+
+<!--MDB Tables-->
+<div class="container mt-4">
+
+  <div class="card">
+    <div class="card-body">
+
+      <!-- Grid row -->
+      <div class="row">
+        <!-- Grid column -->
+        <div class="col-md-12">
+          <h2 class="py-3 text-center font-bold font-up blue-text">List of shops</h2>
+        </div>
+        <!-- Grid column -->
+      </div>
+      <!-- Grid row -->
+
+      <!--Table-->
+      <table class="table table-striped table-bordered table-hover table-sm" width="100%">
+
+        <!--Table head-->
+        <thead>
+          <tr>
+            <th class="th-sm sortable">Shop title</th>
+            <th class="th-sm sortable">City</th>
+            <th class="th-sm sortable">State</th>
+            <th class="th-sm sortable">Address</th>
+            <th class="th-sm sortable">Phone</th>
+            <th class="th-sm sortable">Edit</th>
+          </tr>
+        </thead>
+
+        <!--Table body-->
+        <tbody>
+          <tr *ngFor="let shop of shops">
+            <td>{{shop.name}}</td>
+            <td>{{shop.city}}</td>
+            <td>{{shop.state}}</td>
+            <td>{{shop.address}}</td>
+            <td>{{shop.phone}}</td>
+            <td>
+              <a routerLink="#">
+                <button type="button" class="btn btn-outline-info btn-sm">Edit</button>
+              </a>
+            </td>
+          </tr>
+        </tbody>
+        <!--Table body-->
+
+      </table>
+
+    </div>
+  </div>
+
+</div>
+

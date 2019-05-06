@@ -1,0 +1,33 @@
+<div class="container">
+
+  <legend>Create new product record:</legend>
+
+  <div class="form-group col-xs-6">
+    <label for="name-field">Product Title</label>
+    <input type="text" class="form-control" id="name-field" name="name-field" #productName required>
+  </div>
+
+  <div class="form-group col-xs-6">
+    <label for="type-field">Category</label>
+    <input type="text" class="form-control" id="type-field" name="type-field" #productType required>
+  </div>
+
+  <div class="form-group col-xs-6">
+    <label for="type-field">Price</label>
+    <input type="number" class="form-control" id="price-field" name="type-field" #productPrice required>
+  </div>
+
+  <div class="form-group col-xs-12">
+    <label for="body-field">Description</label>
+    <textarea id="body-field" name="body-field" class="form-control" #productDescription required></textarea>
+  </div>
+
+  <div class="form-group col-xs-12">
+    <button type="submit" class="btn btn-primary btn-lg btn-block"
+            button (click)="add(productName.value, productType.value, productPrice.value, productDescription.value);
+             productName.value=''; productType.value=''; productPrice.value=''; productDescription.value=''">
+      Save
+    </button>
+  </div>
+
+</div>

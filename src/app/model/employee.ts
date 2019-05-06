@@ -1,9 +1,13 @@
+import {Shop} from './shop';
+
 export class Employee {
-  id: number;
+  employeeId: number;
   firstName: string;
   lastName: string;
   phone: string;
   email: string;
-  shopId: number;
   role: string;
+
+  shop: Shop;
+  shopUrl: string;
 }

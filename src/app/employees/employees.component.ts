@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Employee } from '../employee';
-import { EmployeeService } from '../employee.service';
-
+import { Employee } from '../model/employee';
+import { EmployeeService } from '../service/employee.service';
+import {forEach} from '@angular/router/src/utils/collection';
+import {Shop} from '../model/shop';
+import {ShopService} from '../service/shop.service';
 
 @Component({
   selector: 'app-employees',
@@ -10,37 +12,40 @@ import { EmployeeService } from '../employee.service';
 })
 export class EmployeesComponent implements OnInit {
   employees: Employee[];
-  employee2: Employee;
-  employee1: Employee = {
-    id: 100000,
-    firstName: 'awefawef',
-    lastName: 'wefawfawf',
-    phone: 'asdfasdfasdf',
-    email: 'asdfasdfasdf',
-    shopId: 123,
-    role: 'waefawef'
-  };
 
-  // constructor(private employeeService: EmployeeService) { }
-  constructor(private employeeService: EmployeeService) {
-    console.log(' ~~~~ ~~~~ in 1 constructor employees.component.ts');
+  // pagination settings
+  currentPage: number;
+  sizeOfPage: number;
+  totalElements: number;
+  totalPages: number;
 
+  sortField: string;
+  orderField: string;
+
+  pages: number[]; // numbers of all pages [1;2...8]
+
+  constructor(private employeeService: EmployeeService, private shopService: ShopService) { }
+
+  ngOnInit() {
+    this.getEmployees(0);
   }
 
-  ngOnInit(){
-    this.getEmployees();
-  }
+  getEmployees(page): void {
+    this.employeeService.getEmployees(page, null, null, null)
+      .subscribe(response => {
+        this.employees = response['_embedded']['employees']
+          .map(employeeJson => {
+            const employee = employeeJson;
+            employee.shop = employeeJson['shop'];
+            return employee;
+          });
 
-  getEmployees(): void {
-    console.log('in heroes.component.ts getEmployees: ');
-    this.employeeService.getEmployees()
-      .subscribe(employeesResponse => {
-        console.log('~~~~~ in heroes.component.ts getEmployees heroes: ', employeesResponse);
-        console.log('~~~~~ in heroes.component.ts getEmployees heroes: ', employeesResponse['_embedded']['employees']);
-        this.employees = employeesResponse['_embedded']['employees'];
-        console.log('~~~~~ ~~~~~~ this.employees:', this.employees);
-        this.employee2 = this.employees[0];
-        console.log('~~~~~ ~~~~~~ this.employee2:', this.employee2);
+        this.currentPage     = response['page']['number'];
+        this.sizeOfPage     = response['page']['size'];
+        this.totalElements  = response['page']['totalElements'];
+        this.totalPages     = response['page']['totalPages'];
+
+        this.pages = Array.from(Array(this.totalPages), (x, index) => index + 1);
       });
   }
 

@@ -1,6 +1,6 @@
-<script src="../model/employee.ts"></script>
+<script src="../model/product.ts"></script>
 
-<!--MDB Tables-->
+  <!--MDB Tables-->
 <div class="container mt-4">
 
   <div class="card">
@@ -10,38 +10,31 @@
       <div class="row">
         <!-- Grid column -->
         <div class="col-md-12">
-          <h2 class="py-3 text-center font-bold font-up blue-text">List of employees</h2>
+          <h2 class="py-3 text-center font-bold font-up blue-text">List of products</h2>
         </div>
         <!-- Grid column -->
       </div>
       <!-- Grid row -->
 
       <!--Table-->
-      <table class="table table-striped table-bordered table-hover table-sm" width="100%">
+      <table class="table table-striped table-bordered table-hover table-sm">
 
         <!--Table head-->
         <thead>
           <tr>
-            <th class="th-sm sortable">Last Name</th>
-            <th class="th-sm sortable">First Name</th>
-            <th class="th-sm sortable">Role</th>
-            <th class="th-sm sortable">Shop</th>
-            <th class="th-sm sortable">City</th>
-            <th class="th-sm sortable">Edit</th>
+            <th>Title</th><th>Category</th><th>Price</th><th>Details</th>
           </tr>
         </thead>
         <!--Table head-->
 
         <!--Table body-->
         <tbody>
-          <tr *ngFor="let employee of employees">
-            <td>{{employee.lastName}}</td>
-            <td>{{employee.firstName}}</td>
-            <td>{{employee.role}}</td>
-            <td>{{employee.shop.name}}</td>
-            <td>{{employee.shop.city}}</td>
+          <tr *ngFor="let product of products">
+            <td>{{product.name}}</td>
+            <td>{{product.type}}</td>
+            <td>{{product.price}}</td>
             <td>
-              <a routerLink="/employees/{{employee.employeeId}}">
+              <a routerLink="/products/{{product.productId}}">
                 <button type="button" class="btn btn-outline-info btn-sm">Edit</button>
               </a>
             </td>
@@ -59,35 +52,35 @@
             <!--First-->
             <li>
               <span class="page-span">
-                <button type="submit" class="page-link" button (click)="getEmployees(0);">First</button>
+                <button type="submit" class="page-link" button (click)="getProducts(0);">First</button>
               </span>
             </li>
 
             <!--Arrow left-->
             <li>
               <span class="page-span">
-                <button type="submit" class="page-link" button (click)="getEmployees(currentPage-1);">&laquo;</button>
+                <button type="submit" class="page-link" button (click)="getProducts(currentPage-1);">&laquo;</button>
               </span>
             </li>
 
             <!--Numbers-->
             <li *ngFor="let pageNumber of pages" class="page-item">
               <span class="page-span">
-                <button type="submit" class="page-link" button (click)="getEmployees(pageNumber-1);">{{pageNumber}}</button>
+                <button type="submit" class="page-link" button (click)="getProducts(pageNumber-1);">{{pageNumber}}</button>
               </span>
             </li>
 
             <!--Arrow right-->
             <li>
               <span class="page-span">
-                <button type="submit" class="page-link" button (click)="getEmployees(currentPage+1);">&raquo;</button>
+                <button type="submit" class="page-link" button (click)="getProducts(currentPage+1);">&raquo;</button>
               </span>
             </li>
 
             <!--Last-->
             <li>
               <span class="page-span">
-                <button type="submit" class="page-link" button (click)="getEmployees(totalPages-1);">Last</button>
+                <button type="submit" class="page-link" button (click)="getProducts(totalPages-1);">Last</button>
               </span>
             </li>
           </ul>
@@ -97,6 +90,8 @@
       <!--Bottom Table UI-->
     </div>
   </div>
+
+  <hr class="my-4">
 
 </div>
 

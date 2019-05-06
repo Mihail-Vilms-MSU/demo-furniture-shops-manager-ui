@@ -10,7 +10,7 @@
       <div class="row">
         <!-- Grid column -->
         <div class="col-md-12">
-          <h2 class="py-3 text-center font-bold font-up blue-text">List of employees</h2>
+          <h2 class="py-3 text-center font-bold font-up blue-text">List of purchases</h2>
         </div>
         <!-- Grid column -->
       </div>
@@ -21,31 +21,29 @@
 
         <!--Table head-->
         <thead>
-          <tr>
-            <th class="th-sm sortable">Last Name</th>
-            <th class="th-sm sortable">First Name</th>
-            <th class="th-sm sortable">Role</th>
-            <th class="th-sm sortable">Shop</th>
-            <th class="th-sm sortable">City</th>
-            <th class="th-sm sortable">Edit</th>
-          </tr>
+        <tr>
+          <th class="th-sm sortable">Employee's name</th>
+          <th class="th-sm sortable">Employee's position</th>
+          <th class="th-sm sortable">Shop's title</th>
+          <th class="th-sm sortable">City</th>
+          <th class="th-sm sortable">Info</th>
+        </tr>
         </thead>
         <!--Table head-->
 
         <!--Table body-->
         <tbody>
-          <tr *ngFor="let employee of employees">
-            <td>{{employee.lastName}}</td>
-            <td>{{employee.firstName}}</td>
-            <td>{{employee.role}}</td>
-            <td>{{employee.shop.name}}</td>
-            <td>{{employee.shop.city}}</td>
-            <td>
-              <a routerLink="/employees/{{employee.employeeId}}">
-                <button type="button" class="btn btn-outline-info btn-sm">Edit</button>
-              </a>
-            </td>
-          </tr>
+        <tr *ngFor="let purchase of purchases">
+          <td>{{purchase.employee.firstName}} {{purchase.employee.lastName}}</td>
+          <td>{{purchase.employee.role}}</td>
+          <td>{{purchase.shop.name}}</td>
+          <td>{{purchase.shop.city}}</td>
+          <td>
+            <a routerLink="/purchases/{{purchase.purchaseId}}">
+              <button type="button" class="btn btn-outline-info btn-sm">Info</button>
+            </a>
+          </td>
+        </tr>
         </tbody>
         <!--Table body-->
 
@@ -59,35 +57,35 @@
             <!--First-->
             <li>
               <span class="page-span">
-                <button type="submit" class="page-link" button (click)="getEmployees(0);">First</button>
+                <button type="submit" class="page-link" button (click)="getPurchases(0);">First</button>
               </span>
             </li>
 
             <!--Arrow left-->
             <li>
               <span class="page-span">
-                <button type="submit" class="page-link" button (click)="getEmployees(currentPage-1);">&laquo;</button>
+                <button type="submit" class="page-link" button (click)="getPurchases(currentPage-1);">&laquo;</button>
               </span>
             </li>
 
             <!--Numbers-->
             <li *ngFor="let pageNumber of pages" class="page-item">
               <span class="page-span">
-                <button type="submit" class="page-link" button (click)="getEmployees(pageNumber-1);">{{pageNumber}}</button>
+                <button type="submit" class="page-link" button (click)="getPurchases(pageNumber-1);">{{pageNumber}}</button>
               </span>
             </li>
 
             <!--Arrow right-->
             <li>
               <span class="page-span">
-                <button type="submit" class="page-link" button (click)="getEmployees(currentPage+1);">&raquo;</button>
+                <button type="submit" class="page-link" button (click)="getPurchases(currentPage+1);">&raquo;</button>
               </span>
             </li>
 
             <!--Last-->
             <li>
               <span class="page-span">
-                <button type="submit" class="page-link" button (click)="getEmployees(totalPages-1);">Last</button>
+                <button type="submit" class="page-link" button (click)="getPurchases(totalPages-1);">Last</button>
               </span>
             </li>
           </ul>

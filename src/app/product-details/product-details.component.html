@@ -1,0 +1,34 @@
+<div class="container">
+
+  <legend>Product details</legend>
+
+  <div class="form-group col-xs-6">
+    <label for="name-field">Product Title</label>
+    <input type="text" class="form-control" id="name-field" name="name-field" value="{{product.name}}" required>
+  </div>
+
+  <div class="form-group col-xs-6">
+    <label for="type-field">Category</label>
+    <input type="text" class="form-control" id="type-field" name="type-field" value="{{product.type}}" required>
+  </div>
+
+  <div class="form-group col-xs-12">
+    <label for="body-field">Description</label>
+    <textarea id="body-field" name="body-field" class="form-control" value="{{product.description}}" required></textarea>
+  </div>
+
+  <div class="form-group col-xs-6">
+    <label for="created-at-field">Created at</label>
+    <input type="date" class="form-control" id="created-at-field" name="type-field" value="{{product.createdAt}}" readonly required>
+  </div>
+
+  <div class="form-group col-xs-6">
+    <label for="updated-at-field">Created at</label>
+    <input type="date" class="form-control" id="updated-at-field" name="type-field" value="{{product.updatedAt}}" readonly required>
+  </div>
+
+  <div class="form-group col-xs-12">
+    <button type="submit" class="btn btn-primary btn-lg btn-block">Save</button>
+  </div>
+
+</div>
