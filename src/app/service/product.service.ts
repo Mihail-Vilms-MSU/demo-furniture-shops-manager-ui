@@ -1,8 +1,7 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Product} from '../model/product';
-import { catchError, map, tap } from 'rxjs/operators';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -13,10 +12,12 @@ const httpOptions = {
 })
 
 export class ProductService {
+
   constructor(private http: HttpClient) { }
 
   // ////////////////////////// paginated collection >>>>>>>>>>>>>>>>
 
+  private productUrl = 'http://localhost:8080/products';
   private productsUrl = 'http://localhost:8080/products?page=%page%&size=%size%&sort=%field%,%order%';
 
   getProducts(page, size, field, order) {
@@ -48,14 +49,17 @@ export class ProductService {
       .replace('%order%', order);
   }
 
-  // // ////////////////////////// paginated collection <<<<<<<<<<<<<<
-  getProduct(id: number): Observable<Product> {
-    return this.http.get<Product>(this.productsUrl + '/' + id);
+  // //////////////////////////// paginated collection <<<<<<<<<<<<<<
+
+  getProduct(productId: string): Observable<Product> {
+    return this.http.get<Product>(this.productUrl + '/' + productId);
   }
 
   addProduct(product: Product): Observable<Product> {
-    console.log(' *** add product record: ' + JSON.stringify(product));
     return this.http.post<Product>(this.productsUrl, product, httpOptions);
   }
 
+  saveProduct(product: Product, productId: string): Observable<Product> {
+    return this.http.put<Product>(this.productUrl + '/' + productId, product, httpOptions);
+  }
 }

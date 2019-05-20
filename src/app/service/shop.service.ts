@@ -16,12 +16,22 @@ export class ShopService {
   constructor(private http: HttpClient) { }
 
   private shopsUrl = 'http://localhost:8080/shops';
+  private productsInShopUrl = 'http://localhost:8080/shops/%shopId%/products';
 
   getShops(): Observable<Shop[]> {
     return this.http.get<Shop[]>(this.shopsUrl);
   }
 
-  getShop(shopUrl): Observable<Shop> {
-    return this.http.get<Shop>(shopUrl);
+  getShop(shopId: string): Observable<Shop> {
+    return this.http.get<Shop>(this.shopsUrl + '/' + shopId);
   }
+
+  getProductsInShop(shopId) {
+    return this.http.get<Shop>(this.productsInShopUrl.replace('%shopId%', shopId));
+  }
+
+  addProductsToShopStorage(shopId: string, amountOfProductsMap): void {
+    this.http.post(this.productsInShopUrl.replace('%shopId%', shopId), amountOfProductsMap, httpOptions).subscribe();
+  }
+
 }

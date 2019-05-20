@@ -25,6 +25,7 @@ export class ProductsComponent implements OnInit {
 
   ngOnInit() {
     this.getProducts(0);
+
   }
 
   getProducts(page): void {
@@ -32,7 +33,7 @@ export class ProductsComponent implements OnInit {
       .subscribe(response => {
         this.products = response['_embedded']['products'];
 
-        this.currentPage     = response['page']['number'];
+        this.currentPage    = response['page']['number'];
         this.sizeOfPage     = response['page']['size'];
         this.totalElements  = response['page']['totalElements'];
         this.totalPages     = response['page']['totalPages'];
@@ -41,6 +42,10 @@ export class ProductsComponent implements OnInit {
       });
   }
 
+  /**
+   *
+   * @param name
+   */
   add(name: string): void {
     name = name.trim();
     if (!name) { return; }

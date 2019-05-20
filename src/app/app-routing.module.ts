@@ -4,12 +4,18 @@ import { RouterModule, Routes } from '@angular/router';
 import { ProductsComponent } from './products/products.component';
 import { EmployeesComponent } from './employees/employees.component';
 import { ShopsComponent } from './shops/shops.component';
-import {PurchasesComponent} from './purchases/purchases.component';
+import { PurchasesComponent } from './purchases/purchases.component';
 
 import { ProductDetailsComponent } from './product-details/product-details.component';
+import { ShopDetailsComponent } from './shop-details/shop-details.component';
+import {EmployeeDetailsComponent} from './employee-details/employee-details.component';
+import {PurchaseDetailsComponent} from './purchase-details/purchase-details.component';
 
 import { ProductNewComponent } from './product-new/product-new.component';
 
+import {AmountOfProductsComponent} from './amount-of-products/amount-of-products.component';
+import {PurchaseNewComponent} from './purchase-new/purchase-new.component';
+import {EmployeeNewComponent} from './employee-new/employee-new.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/employees', pathMatch: 'full' },
@@ -20,8 +26,15 @@ const routes: Routes = [
   { path: 'purchases', component: PurchasesComponent },
 
   { path: 'products/:id', component: ProductDetailsComponent },
+  { path: 'shops/:id', component: ShopDetailsComponent },
+  { path: 'employees/:id', component: EmployeeDetailsComponent },
+  { path: 'purchases/:id', component: PurchaseDetailsComponent },
 
-  { path: 'products-new', component: ProductNewComponent }
+  { path: 'products-new', component: ProductNewComponent },
+  { path: 'employee-new', component: EmployeeNewComponent },
+  { path: 'purchase-new', component: PurchaseNewComponent },
+
+  { path: 'shops/:shopId/products', component: AmountOfProductsComponent}
 ];
 
 @NgModule({

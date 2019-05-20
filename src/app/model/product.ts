@@ -1,11 +1,11 @@
 export class Product {
-  productId: number;
+  productId: string;
   name: string;
   price: number;
   type: string;
   description: string;
-  isActive: boolean
-  createdAt: Date;
-  updatedAt: Date;
+  isActive: boolean;
+  createdAt: number;
+  updatedAt: number;
 }
 

@@ -27,7 +27,7 @@
             <th class="th-sm sortable">State</th>
             <th class="th-sm sortable">Address</th>
             <th class="th-sm sortable">Phone</th>
-            <th class="th-sm sortable">Edit</th>
+            <th class="th-sm sortable">Details</th>
           </tr>
         </thead>
 
@@ -40,8 +40,8 @@
             <td>{{shop.address}}</td>
             <td>{{shop.phone}}</td>
             <td>
-              <a routerLink="#">
-                <button type="button" class="btn btn-outline-info btn-sm">Edit</button>
+              <a routerLink="/shops/{{shop.shopId}}">
+                <button type="button" class="btn btn-outline-info btn-sm">Details</button>
               </a>
             </td>
           </tr>

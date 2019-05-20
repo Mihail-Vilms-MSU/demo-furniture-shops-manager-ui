@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
@@ -17,6 +17,11 @@ import { ProductDetailsComponent } from './product-details/product-details.compo
 import { EmployeeDetailsComponent } from './employee-details/employee-details.component';
 
 import { ProductNewComponent } from './product-new/product-new.component';
+import { AmountOfProductsComponent } from './amount-of-products/amount-of-products.component';
+import { ShopDetailsComponent } from './shop-details/shop-details.component';
+import { PurchaseDetailsComponent } from './purchase-details/purchase-details.component';
+import { PurchaseNewComponent } from './purchase-new/purchase-new.component';
+import { EmployeeNewComponent } from './employee-new/employee-new.component';
 
 
 @NgModule({
@@ -29,12 +34,18 @@ import { ProductNewComponent } from './product-new/product-new.component';
     ShopsComponent,
     PurchasesComponent,
     ProductDetailsComponent,
-    ProductNewComponent
+    ProductNewComponent,
+    AmountOfProductsComponent,
+    ShopDetailsComponent,
+    PurchaseDetailsComponent,
+    PurchaseNewComponent,
+    EmployeeNewComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

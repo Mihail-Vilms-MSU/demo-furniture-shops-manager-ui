@@ -22,6 +22,7 @@
         <!--Table head-->
         <thead>
           <tr>
+            <th class="th-sm sortable">Number</th>
             <th class="th-sm sortable">Last Name</th>
             <th class="th-sm sortable">First Name</th>
             <th class="th-sm sortable">Role</th>
@@ -35,6 +36,7 @@
         <!--Table body-->
         <tbody>
           <tr *ngFor="let employee of employees">
+            <td>{{employee.employeeId}}</td>
             <td>{{employee.lastName}}</td>
             <td>{{employee.firstName}}</td>
             <td>{{employee.role}}</td>

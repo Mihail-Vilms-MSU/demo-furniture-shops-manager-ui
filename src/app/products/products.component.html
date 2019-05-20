@@ -22,7 +22,7 @@
         <!--Table head-->
         <thead>
           <tr>
-            <th>Title</th><th>Category</th><th>Price</th><th>Details</th>
+            <th>Number</th><th>Title</th><th>Category</th><th>Price</th><th>Details</th>
           </tr>
         </thead>
         <!--Table head-->
@@ -30,9 +30,10 @@
         <!--Table body-->
         <tbody>
           <tr *ngFor="let product of products">
+            <td>{{product.productId}}</td>
             <td>{{product.name}}</td>
             <td>{{product.type}}</td>
-            <td>{{product.price}}</td>
+            <td>{{product.price | currency}}</td>
             <td>
               <a routerLink="/products/{{product.productId}}">
                 <button type="button" class="btn btn-outline-info btn-sm">Edit</button>

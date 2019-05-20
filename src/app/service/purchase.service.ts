@@ -3,6 +3,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Purchase} from '../model/purchase';
 import {Employee} from '../model/employee';
+import {Product} from '../model/product';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -16,6 +17,7 @@ export class PurchaseService {
 
   constructor(private http: HttpClient) { }
 
+  private purchaseUrl = 'http://localhost:8080/purchases';
   private purchasesUrl = 'http://localhost:8080/purchases?page=%page%&size=%size%';
 
   getPurchases(page, size, field, order) {
@@ -45,5 +47,25 @@ export class PurchaseService {
       .replace('%size%', size)
       .replace('%field%', field);
       // .replace('%order%', order);
+  }
+
+  getPurchase(purchaseId: string): Observable<Purchase> {
+    return this.http.get<Purchase>(this.purchaseUrl + '/' + purchaseId);
+  }
+
+  getPurchasePositions(purchaseId: string) {
+    return this.http.get(this.purchaseUrl + '/' + purchaseId + '/' + 'products');
+  }
+
+  addPurchase(purchase: Purchase, productPositions) {
+
+  }
+
+  private addPurchaseEntry(purchase: Purchase) {
+
+  }
+
+  private addPurchasePositions(purchase: Purchase) {
+
   }
 }

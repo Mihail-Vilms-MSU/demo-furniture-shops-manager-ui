@@ -62,25 +62,19 @@ export class HeaderComponent implements OnInit {
           caption: 'List of employees',
           link: 'employees'
         }, {
-          caption: 'Product\'s stocks in shops',
-          link: 'products'
-        }, {
           caption: 'Create employee record',
-          link: 'shops-new',
+          link: 'employee-new',
         }]
       },
       {
         caption: 'Purchases',
         link: 'purchases',
         dropDownList: [{
-          caption: 'List of shops',
+          caption: 'List of purchases',
           link: 'purchases'
         }, {
-          caption: 'Product\'s stocks in shops',
-          link: 'purchases'
-        }, {
-          caption: 'Create shop record',
-          link: 'shops-new',
+          caption: 'Create purchase record',
+          link: 'purchase-new',
         }]
       }
     ];
