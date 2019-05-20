@@ -1,0 +1,63 @@
+<div class="container">
+
+  <legend>Product record details</legend>
+
+  <form>
+    <div class="form-group row">
+      <div class="col-sm-6">
+        <label for="name-field">Product Title</label>
+        <input type="text" class="form-control" id="name-field" name="name-field" value="{{product?.name}}" #productName required>
+      </div>
+
+      <div class="col-sm-1"></div>
+
+      <div class="col-sm-5">
+        <label for="type-field">Category</label>
+        <input type="text" class="form-control" id="type-field" name="type-field" value="{{product?.type}}" #productType required>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <div class="col-sm-6">
+        <label for="type-field">Price</label>
+        <input type="number" class="form-control" id="price-field" name="type-field" value="{{product?.price}}" #productPrice required>
+      </div>
+      <div class="col-sm-6"></div>
+    </div>
+
+    <div class="form-group row">
+      <div class="col-sm-12">
+        <label for="body-field">Description</label>
+        <textarea id="body-field" name="body-field" class="form-control" value="{{product?.description}}" #productDescription required></textarea>
+      </div>
+      <div class="col-sm-6"></div>
+    </div>
+
+    <div class="form-group row">
+      <div class="col-sm-6">
+        <label for="updated-at-field">Update at</label>
+        <input type="datetime" class="form-control" id="updated-at-field" name="type-field" value="{{product?.updatedAt | date :'yyyy-MM-dd hh:mm:ss'}}" readonly required>
+      </div>
+
+      <div class="col-sm-1"></div>
+
+      <div class="col-sm-5">
+        <label for="created-at-field">Created at</label>
+        <input type="datetime" class="form-control" id="created-at-field" name="type-field" value="{{product?.createdAt | date :'yyyy-MM-dd hh:mm:ss'}}" readonly required>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <div class="col-sm-6">
+        <button type="submit" class="btn btn-primary btn-lg btn-block"
+                button (click)="save(product.productId, productName.value, productType.value, productPrice.value, productDescription.value);
+                 productName.value=product.name; productType.value=product.type;
+                 productPrice.value=product.price; productDescription.value=product.description">
+          Save
+        </button>
+      </div>
+      <div class="col-sm-6"></div>
+    </div>
+
+  </form>
+</div>

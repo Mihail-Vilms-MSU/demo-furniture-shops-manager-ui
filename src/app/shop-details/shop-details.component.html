@@ -1,0 +1,21 @@
+<div class="container">
+  <legend>Shop record details</legend>
+
+  <form>
+
+    <div class="form-group row">
+      <div class="col-sm-6">
+        <label for="name-field">Shop Title</label>
+        <input type="text" class="form-control" id="name-field" name="name-field" value="{{shop?.name}}" #shopName required>
+      </div>
+
+      <div class="col-sm-1"></div>
+
+      <div class="col-sm-5">
+        <label for="type-field">City</label>
+        <input type="text" class="form-control" id="type-field" name="type-field" value="{{shop?.city}}({{shop?.state}})" #shopCity required>
+      </div>
+    </div>
+
+  </form>
+</div>

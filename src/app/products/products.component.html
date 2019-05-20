@@ -1,0 +1,98 @@
+<script src="../model/product.ts"></script>
+
+  <!--MDB Tables-->
+<div class="container mt-4">
+
+  <div class="card">
+    <div class="card-body">
+
+      <!-- Grid row -->
+      <div class="row">
+        <!-- Grid column -->
+        <div class="col-md-12">
+          <h2 class="py-3 text-center font-bold font-up blue-text">List of products</h2>
+        </div>
+        <!-- Grid column -->
+      </div>
+      <!-- Grid row -->
+
+      <!--Table-->
+      <table class="table table-striped table-bordered table-hover table-sm">
+
+        <!--Table head-->
+        <thead>
+          <tr>
+            <th>Number</th><th>Title</th><th>Category</th><th>Price</th><th>Details</th>
+          </tr>
+        </thead>
+        <!--Table head-->
+
+        <!--Table body-->
+        <tbody>
+          <tr *ngFor="let product of products">
+            <td>{{product.productId}}</td>
+            <td>{{product.name}}</td>
+            <td>{{product.type}}</td>
+            <td>{{product.price | currency}}</td>
+            <td>
+              <a routerLink="/products/{{product.productId}}">
+                <button type="button" class="btn btn-outline-info btn-sm">Edit</button>
+              </a>
+            </td>
+          </tr>
+        </tbody>
+        <!--Table body-->
+
+      </table>
+
+      <!--Bottom Table UI-->
+      <div class="d-flex justify-content-center">
+        <!--Pagination -->
+        <nav class="my-4 pt-2">
+          <ul class="pagination pagination-circle pg-blue mb-0">
+            <!--First-->
+            <li>
+              <span class="page-span">
+                <button type="submit" class="page-link" button (click)="getProducts(0);">First</button>
+              </span>
+            </li>
+
+            <!--Arrow left-->
+            <li>
+              <span class="page-span">
+                <button type="submit" class="page-link" button (click)="getProducts(currentPage-1);">&laquo;</button>
+              </span>
+            </li>
+
+            <!--Numbers-->
+            <li *ngFor="let pageNumber of pages" class="page-item">
+              <span class="page-span">
+                <button type="submit" class="page-link" button (click)="getProducts(pageNumber-1);">{{pageNumber}}</button>
+              </span>
+            </li>
+
+            <!--Arrow right-->
+            <li>
+              <span class="page-span">
+                <button type="submit" class="page-link" button (click)="getProducts(currentPage+1);">&raquo;</button>
+              </span>
+            </li>
+
+            <!--Last-->
+            <li>
+              <span class="page-span">
+                <button type="submit" class="page-link" button (click)="getProducts(totalPages-1);">Last</button>
+              </span>
+            </li>
+          </ul>
+        </nav>
+        <!--/Pagination -->
+      </div>
+      <!--Bottom Table UI-->
+    </div>
+  </div>
+
+  <hr class="my-4">
+
+</div>
+
