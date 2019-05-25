@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
 import {EmployeeService} from '../service/employee.service';
-import {Product} from '../model/product';
+import {Shop} from '../model/shop';
+import {ShopService} from '../service/shop.service';
+import {Employee} from '../model/employee';
 
 @Component({
   selector: 'app-employee-new',
@@ -9,22 +11,26 @@ import {Product} from '../model/product';
   styleUrls: ['./employee-new.component.css']
 })
 export class EmployeeNewComponent implements OnInit {
-  newEmployee;
+  shops: Shop[];
 
   constructor(private router: Router,
-              private employeeService: EmployeeService
+              private employeeService: EmployeeService,
+              private shopService: ShopService
   ) { }
 
   ngOnInit() {
+    this.getShops();
   }
 
-  // add(name: string, type: string, price: number, description: string): void {
-  //   this.productService.addProduct({ name, type, price, description } as Product).subscribe();
-  //   this.router.navigate(['/products']);
-  // }
-
-  add(): void {
-
+  getShops(): void {
+    this.shopService.getShops()
+      .subscribe(shopsResponse => {
+        this.shops = shopsResponse['_embedded'].shops;
+      });
   }
 
+  add(firstName: string, lastName: string, email: string, phone: string, role: string, shop: string): void {
+    this.employeeService.addEmployee({firstName, lastName, email, phone, role} as Employee, shop).subscribe();
+    this.router.navigate(['/employees']);
+  }
 }

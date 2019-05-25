@@ -1,6 +1,8 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {ShopService} from './shop.service';
+import {Employee} from '../model/employee';
+import {Observable} from 'rxjs';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -13,6 +15,8 @@ const httpOptions = {
 export class EmployeeService {
 
   constructor(private http: HttpClient, private shopService: ShopService) { }
+
+  private employeeUrl = 'http://localhost:8080/employees';
 
   private employeesUrl = 'http://localhost:8080/employees?page=%page%&size=%size%&sort=%field%,%order%';
 
@@ -45,4 +49,8 @@ export class EmployeeService {
       .replace('%order%', order);
   }
 
+  addEmployee(employee: Employee, shopId: string): Observable<Employee> {
+    console.log(this.employeeUrl + '?shopId=' + shopId);
+    return this.http.post<Employee>(this.employeeUrl + '?shopId=' + shopId, employee, httpOptions);
+  }
 }
