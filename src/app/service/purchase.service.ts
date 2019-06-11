@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Purchase} from '../model/purchase';
+import {environment} from '../../environments/environment';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -15,11 +16,11 @@ export class PurchaseService {
 
   constructor(private http: HttpClient) { }
 
-  private purchaseUrl = 'http://localhost:8080/purchases';
+  private purchaseUrl = environment.apiUrl + 'purchases';
 
-  private purchasesUrl = 'http://localhost:8080/purchases?page=%page%&size=%size%';
+  private purchasesUrl = environment.apiUrl + 'purchases?page=%page%&size=%size%';
 
-  private newPurchaseUrl = 'http://localhost:8080/purchases?shopId=%shopId%&employeeId=%employeeId%';
+  private newPurchaseUrl = environment.apiUrl + 'purchases?shopId=%shopId%&employeeId=%employeeId%';
 
   getPurchases(page, size, field, order) {
     return this.http.get(this.composeUrl(page, size, field));

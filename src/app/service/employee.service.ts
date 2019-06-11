@@ -3,6 +3,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {ShopService} from './shop.service';
 import {Employee} from '../model/employee';
 import {Observable} from 'rxjs';
+import {environment} from '../../environments/environment';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -16,11 +17,11 @@ export class EmployeeService {
 
   constructor(private http: HttpClient, private shopService: ShopService) { }
 
-  private employeeUrl = 'http://localhost:8080/employees';
+  private employeeUrl = environment.apiUrl + 'employees';
 
-  private employeesUrl = 'http://localhost:8080/employees?page=%page%&size=%size%&sort=%field%,%order%';
+  private employeesUrl = environment.apiUrl + 'employees?page=%page%&size=%size%&sort=%field%,%order%';
 
-  private employeesByShopUrl = 'http://localhost:8080/shops/%shopId%/employees';
+  private employeesByShopUrl = environment.apiUrl + 'shops/%shopId%/employees';
 
   getEmployees(page, size, field, order) {
     return this.http.get(this.composeUrl(page, size, field, order));
