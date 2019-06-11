@@ -1,9 +1,7 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Purchase} from '../model/purchase';
-import {Employee} from '../model/employee';
-import {Product} from '../model/product';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -18,7 +16,10 @@ export class PurchaseService {
   constructor(private http: HttpClient) { }
 
   private purchaseUrl = 'http://localhost:8080/purchases';
+
   private purchasesUrl = 'http://localhost:8080/purchases?page=%page%&size=%size%';
+
+  private newPurchaseUrl = 'http://localhost:8080/purchases?shopId=%shopId%&employeeId=%employeeId%';
 
   getPurchases(page, size, field, order) {
     return this.http.get(this.composeUrl(page, size, field));
@@ -57,15 +58,12 @@ export class PurchaseService {
     return this.http.get(this.purchaseUrl + '/' + purchaseId + '/' + 'products');
   }
 
-  addPurchase(purchase: Purchase, productPositions) {
+  addPurchase(shopId: string, employeeId: string, productsMap) {
+    const targetUrl = this.newPurchaseUrl
+      .replace('%shopId%', shopId)
+      .replace('%employeeId%', employeeId);
 
+    return this.http.post(targetUrl, productsMap).subscribe();
   }
 
-  private addPurchaseEntry(purchase: Purchase) {
-
-  }
-
-  private addPurchasePositions(purchase: Purchase) {
-
-  }
 }

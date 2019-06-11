@@ -14,12 +14,13 @@ import { ShopsComponent } from './shops/shops.component';
 import { PurchasesComponent } from './purchases/purchases.component';
 
 import { ProductDetailsComponent } from './product-details/product-details.component';
+import { ShopDetailsComponent } from './shop-details/shop-details.component';
 import { EmployeeDetailsComponent } from './employee-details/employee-details.component';
+import { PurchaseDetailsComponent } from './purchase-details/purchase-details.component';
 
 import { ProductNewComponent } from './product-new/product-new.component';
 import { AmountOfProductsComponent } from './amount-of-products/amount-of-products.component';
-import { ShopDetailsComponent } from './shop-details/shop-details.component';
-import { PurchaseDetailsComponent } from './purchase-details/purchase-details.component';
+
 import { PurchaseNewComponent } from './purchase-new/purchase-new.component';
 import { EmployeeNewComponent } from './employee-new/employee-new.component';
 

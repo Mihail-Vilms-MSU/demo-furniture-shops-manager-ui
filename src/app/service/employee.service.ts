@@ -20,6 +20,8 @@ export class EmployeeService {
 
   private employeesUrl = 'http://localhost:8080/employees?page=%page%&size=%size%&sort=%field%,%order%';
 
+  private employeesByShopUrl = 'http://localhost:8080/shops/%shopId%/employees';
+
   getEmployees(page, size, field, order) {
     return this.http.get(this.composeUrl(page, size, field, order));
   }
@@ -49,8 +51,11 @@ export class EmployeeService {
       .replace('%order%', order);
   }
 
+  getEmployeesByShop(shopId: string) {
+    return this.http.get(this.employeesByShopUrl.replace('%shopId%', shopId));
+  }
+
   addEmployee(employee: Employee, shopId: string): Observable<Employee> {
-    console.log(this.employeeUrl + '?shopId=' + shopId);
     return this.http.post<Employee>(this.employeeUrl + '?shopId=' + shopId, employee, httpOptions);
   }
 }
