@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Product} from '../model/product';
+import {environment} from '../../environments/environment';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -17,8 +18,9 @@ export class ProductService {
 
   // ////////////////////////// paginated collection >>>>>>>>>>>>>>>>
 
-  private productUrl = 'http://localhost:8080/products';
-  private productsUrl = 'http://localhost:8080/products?page=%page%&size=%size%&sort=%field%,%order%';
+  private productUrl = environment.apiUrl + 'products';
+
+  private productsUrl = environment.apiUrl + 'products?page=%page%&size=%size%&sort=%field%,%order%';
 
   getProducts(page, size, field, order) {
     return this.http.get(this.composeUrl(page, size, field, order));
