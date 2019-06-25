@@ -18,11 +18,15 @@ import { ShopDetailsComponent } from './shop-details/shop-details.component';
 import { EmployeeDetailsComponent } from './employee-details/employee-details.component';
 import { PurchaseDetailsComponent } from './purchase-details/purchase-details.component';
 
-import { ProductNewComponent } from './product-new/product-new.component';
 import { AmountOfProductsComponent } from './amount-of-products/amount-of-products.component';
 
 import { PurchaseNewComponent } from './purchase-new/purchase-new.component';
 import { EmployeeNewComponent } from './employee-new/employee-new.component';
+import { ProductNewComponent } from './product-new/product-new.component';
+
+import { SearchComponentComponent } from './search-component/search-component.component';
+import { AdvancedSearchComponent } from './advanced-search/advanced-search.component';
+import {EventEmitterService} from './service/event-emitter.service';
 
 
 @NgModule({
@@ -40,7 +44,9 @@ import { EmployeeNewComponent } from './employee-new/employee-new.component';
     ShopDetailsComponent,
     PurchaseDetailsComponent,
     PurchaseNewComponent,
-    EmployeeNewComponent
+    EmployeeNewComponent,
+    SearchComponentComponent,
+    AdvancedSearchComponent
   ],
   imports: [
     BrowserModule,
@@ -48,7 +54,7 @@ import { EmployeeNewComponent } from './employee-new/employee-new.component';
     AppRoutingModule,
     FormsModule
   ],
-  providers: [],
+  providers: [EventEmitterService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
