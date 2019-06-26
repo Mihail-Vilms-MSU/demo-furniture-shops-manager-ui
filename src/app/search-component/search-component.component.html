@@ -1,0 +1,25 @@
+<div class="container">
+  <div class="card">
+    <div class="card-body">
+
+      <label>Live Search Box</label>
+
+      <div class="input-group mb-2">
+        <input type="text" [readonly]="isAdvancedSearchOn" class="form-control" (change)="executeSearch()" [(ngModel)]="inputValue">
+        <span class="input-group-btn">
+          <button class="btn btn-success" type="button" (click) = switchAdvancedSearchState()>
+            <i class="fas fa-search-plus"></i>
+             Advanced search
+          </button>
+        </span>
+      </div>
+
+      <div>
+        <app-advanced-search *ngIf="isAdvancedSearchOn"></app-advanced-search>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+

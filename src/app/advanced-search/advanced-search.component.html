@@ -1,0 +1,29 @@
+<div id = "advanced-search-box" class="card bg-light text-dark">
+
+  <div class="card-body form-group">
+
+    <div *ngFor="let field of currentConfig" class="col-sm-3">
+
+      <label>{{field.caption}}</label>
+
+      <input *ngIf="field.tag === 'input'" type={{field.type}} class={{field.class}}
+             (change)="executeLiveSearch()" [(ngModel)]="searchInput[field.name]">
+
+      <select *ngIf="field.tag === 'select'" class="form-control"
+              (change)="executeLiveSearch()" [(ngModel)]="searchInput[field.name]">
+        <option *ngFor="let option of field.options" [value]="option">{{option}}</option>
+      </select>
+
+    </div>
+
+  </div>
+
+  <div class="card-body form-group">
+    <div class="col-sm-3">
+      <button class="btn btn-info" type="button" (click) = cleanInput()>
+        Clean all fields
+      </button>
+    </div>
+  </div>
+
+</div>

@@ -3,6 +3,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Shop} from '../model/shop';
 import {environment} from '../../environments/environment';
+import {SearchComponentComponent} from '../search-component/search-component.component';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -22,6 +23,10 @@ export class ShopService {
 
   getShops(): Observable<Shop[]> {
     return this.http.get<Shop[]>(this.shopsUrl);
+  }
+
+  getShopsByLiveSearch(input): Observable<Shop[]> {
+    return this.http.get<Shop[]>(this.shopsUrl + '?searchInput=' + input);
   }
 
   getShop(shopId: string): Observable<Shop> {
