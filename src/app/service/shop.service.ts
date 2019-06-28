@@ -3,7 +3,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Shop} from '../model/shop';
 import {environment} from '../../environments/environment';
-import {SearchComponentComponent} from '../search-component/search-component.component';
+import {Product} from '../model/product';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -35,6 +35,14 @@ export class ShopService {
 
   getProductsInShop(shopId) {
     return this.http.get<Shop>(this.productsInShopUrl.replace('%shopId%', shopId));
+  }
+
+  addShop(shop: Shop): Observable<Shop> {
+    return this.http.post<Shop>(this.shopsUrl, shop, httpOptions);
+  }
+
+  saveShop(shop: Shop, shopId: string): Observable<Shop> {
+    return this.http.put<Shop>(this.shopsUrl + '/' + shopId, shop, httpOptions);
   }
 
   addProductsToShopStorage(shopId: string, amountOfProductsMap): void {

@@ -1,5 +1,5 @@
 export class Shop {
-  shopId: number;
+  shopId: string;
   name: string;
   city: string;
   state: string;

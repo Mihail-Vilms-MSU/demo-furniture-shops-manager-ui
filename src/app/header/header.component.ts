@@ -52,7 +52,7 @@ export class HeaderComponent implements OnInit {
           link: 'products'
         }, {
           caption: 'Create shop record',
-          link: 'shops-new',
+          link: 'shop-new',
         }]
       },
       {
