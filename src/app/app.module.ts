@@ -27,6 +27,7 @@ import { ProductNewComponent } from './product-new/product-new.component';
 import { SearchComponentComponent } from './search-component/search-component.component';
 import { AdvancedSearchComponent } from './advanced-search/advanced-search.component';
 import {EventEmitterService} from './service/event-emitter.service';
+import { ShopNewComponent } from './shop-new/shop-new.component';
 
 
 @NgModule({
@@ -46,7 +47,8 @@ import {EventEmitterService} from './service/event-emitter.service';
     PurchaseNewComponent,
     EmployeeNewComponent,
     SearchComponentComponent,
-    AdvancedSearchComponent
+    AdvancedSearchComponent,
+    ShopNewComponent
   ],
   imports: [
     BrowserModule,

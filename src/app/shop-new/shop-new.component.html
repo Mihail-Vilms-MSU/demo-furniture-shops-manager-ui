@@ -1,10 +1,11 @@
 <div class="container">
-  <legend>Shop record details</legend>
+
+  <legend>Create new shop record:</legend>
 
   <form class="needs-validation" novalidate>
 
     <div class="form-group row">
-      <div *ngFor="let fieldInfo of fieldsConfig" class="{{fieldInfo.class}}">
+      <div *ngFor="let fieldInfo of fieldsConfig" class="col-md-6 mb-3">
 
         <div class="d-flex">
           <div class="p-2">
@@ -19,15 +20,16 @@
         </div>
 
         <input type="text" class="form-control" id="{{fieldInfo.field}}" name="{{fieldInfo.field}}"
-               placeholder="{{fieldInfo.placeholder}}" [required]="fieldInfo.required"  [readonly]="fieldInfo.readonly" [(ngModel)]="fieldInfo.value" #value="ngModel">
+               placeholder="{{fieldInfo.placeholder}}" [required]="fieldInfo.required" [(ngModel)]="fieldInfo.value" #value="ngModel">
 
       </div>
     </div>
 
     <div class="form-group row">
       <div class="col-sm-4">
-        <button type="submit" class="btn btn-primary btn-lg btn-block" (click)=save()>Save</button>
+        <button type="submit" class="btn btn-primary btn-lg btn-block" (click)=add()>Save</button>
       </div>
     </div>
-  </form>SSS
+  </form>
+
 </div>
