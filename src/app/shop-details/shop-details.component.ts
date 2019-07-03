@@ -101,7 +101,6 @@ export class ShopDetailsComponent implements OnInit {
       });
   }
 
-
   save(): void {
     let jsonShop = {};
 

@@ -4,6 +4,7 @@ import {ShopService} from './shop.service';
 import {Employee} from '../model/employee';
 import {Observable} from 'rxjs';
 import {environment} from '../../environments/environment';
+import {Shop} from "../model/shop";
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -56,7 +57,21 @@ export class EmployeeService {
     return this.http.get(this.employeesByShopUrl.replace('%shopId%', shopId));
   }
 
+  getEmployee(employeeId: string): Observable<Employee> {
+    return this.http.get<Employee>(this.employeeUrl + '/' + employeeId);
+  }
+
   addEmployee(employee: Employee, shopId: string): Observable<Employee> {
     return this.http.post<Employee>(this.employeeUrl + '?shopId=' + shopId, employee, httpOptions);
+  }
+
+  saveEmployee(employee: Employee, employeeId: string, shopId: string): Observable<Employee> {
+    let targetUrl = this.employeeUrl + '/' + employeeId;
+
+    if (shopId) {
+      targetUrl += '?shopId=' + shopId;
+    }
+
+    return this.http.put<Employee>(targetUrl, employee, httpOptions);
   }
 }
