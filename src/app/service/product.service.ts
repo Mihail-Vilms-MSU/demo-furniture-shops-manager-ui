@@ -16,14 +16,17 @@ export class ProductService {
 
   constructor(private http: HttpClient) { }
 
-  // ////////////////////////// paginated collection >>>>>>>>>>>>>>>>
-
   private productUrl = environment.apiUrl + 'products';
 
   private productsUrl = environment.apiUrl + 'products?page=%page%&size=%size%&sort=%field%,%order%';
 
-  getProducts(page, size, field, order) {
-    return this.http.get(this.composeUrl(page, size, field, order));
+  getProducts(page, size, field, order, searchInput) {
+    let url = this.composeUrl(page, size, field, order);
+    if (searchInput) {
+      url += '&searchInput=' + searchInput;
+    }
+    console.log('url: ' + url);
+    return this.http.get(url);
   }
 
   /**
@@ -35,7 +38,7 @@ export class ProductService {
    */
   composeUrl(page, size, field, order): string {
     const defaultPage = 0;
-    const defaultSize = 30;
+    const defaultSize = 10;
     const defaultField = 'name';
     const defaultOrder = 'asc';
 
@@ -50,8 +53,6 @@ export class ProductService {
       .replace('%field%', field)
       .replace('%order%', order);
   }
-
-  // //////////////////////////// paginated collection <<<<<<<<<<<<<<
 
   getProduct(productId: string): Observable<Product> {
     return this.http.get<Product>(this.productUrl + '/' + productId);

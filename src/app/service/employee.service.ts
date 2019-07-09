@@ -28,6 +28,10 @@ export class EmployeeService {
     return this.http.get(this.composeUrl(page, size, field, order));
   }
 
+  getEmployeesByLiveSearch(page, size, field, order, input: string) {
+    return this.http.get(this.composeUrl(page, size, field, order) + '&searchInput=' + input);
+  }
+
   /**
    *
    * @param page

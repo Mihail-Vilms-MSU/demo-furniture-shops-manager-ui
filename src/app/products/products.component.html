@@ -1,5 +1,7 @@
 <script src="../model/product.ts"></script>
 
+<app-search-component></app-search-component>
+
   <!--MDB Tables-->
 <div class="container mt-4">
 
@@ -22,7 +24,10 @@
         <!--Table head-->
         <thead>
           <tr>
-            <th>Number</th><th>Title</th><th>Category</th><th>Price</th><th>Details</th>
+            <th (click)="getAnotherSortOrder('id')"><button type="button" class="btn btn-link btn-outline-dark">Number</button></th>
+            <th (click)="getAnotherSortOrder('name')"><button type="button" class="btn btn-link btn-outline-dark">Title</button></th>
+            <th (click)="getAnotherSortOrder('type')"><button type="button" class="btn btn-link btn-outline-dark">Category</button></th>
+            <th (click)="getAnotherSortOrder('price')"><button type="button" class="btn btn-link btn-outline-dark">Price</button></th>
           </tr>
         </thead>
         <!--Table head-->
@@ -30,20 +35,21 @@
         <!--Table body-->
         <tbody>
           <tr *ngFor="let product of products">
-            <td>{{product.productId}}</td>
+            <td>
+              <a routerLink="/products/{{product.productId}}">
+                <button type="button" class="btn btn-outline-info btn-sm">{{product.productId}}</button>
+              </a>
+            </td>
             <td>{{product.name}}</td>
             <td>{{product.type}}</td>
             <td>{{product.price | currency}}</td>
-            <td>
-              <a routerLink="/products/{{product.productId}}">
-                <button type="button" class="btn btn-outline-info btn-sm">Edit</button>
-              </a>
-            </td>
           </tr>
         </tbody>
         <!--Table body-->
 
       </table>
+
+
 
       <!--Bottom Table UI-->
       <div class="d-flex justify-content-center">
@@ -53,35 +59,35 @@
             <!--First-->
             <li>
               <span class="page-span">
-                <button type="submit" class="page-link" button (click)="getProducts(0);">First</button>
+                <button type="submit" class="page-link" button (click)="getAnotherPage(0);">First</button>
               </span>
             </li>
 
             <!--Arrow left-->
             <li>
               <span class="page-span">
-                <button type="submit" class="page-link" button (click)="getProducts(currentPage-1);">&laquo;</button>
+                <button type="submit" class="page-link" button (click)="getAnotherPage(currentPage-1);">&laquo;</button>
               </span>
             </li>
 
             <!--Numbers-->
             <li *ngFor="let pageNumber of pages" class="page-item">
               <span class="page-span">
-                <button type="submit" class="page-link" button (click)="getProducts(pageNumber-1);">{{pageNumber}}</button>
+                <button type="submit" class="page-link" button (click)="getAnotherPage(pageNumber-1);">{{pageNumber}}</button>
               </span>
             </li>
 
             <!--Arrow right-->
             <li>
               <span class="page-span">
-                <button type="submit" class="page-link" button (click)="getProducts(currentPage+1);">&raquo;</button>
+                <button type="submit" class="page-link" button (click)="getAnotherPage(currentPage+1);">&raquo;</button>
               </span>
             </li>
 
             <!--Last-->
             <li>
               <span class="page-span">
-                <button type="submit" class="page-link" button (click)="getProducts(totalPages-1);">Last</button>
+                <button type="submit" class="page-link" button (click)="getAnotherPage(numberOfPages-1);">Last</button>
               </span>
             </li>
           </ul>

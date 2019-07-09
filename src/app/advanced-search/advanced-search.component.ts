@@ -8,6 +8,7 @@ import {AdvancedSearchService} from '../service/advanced-search.service';
   styleUrls: ['./advanced-search.component.css']
 })
 export class AdvancedSearchComponent implements OnInit {
+
   private isAdvancedSearchActive;
   private currentConfig;
   private stringInput;
@@ -84,6 +85,35 @@ export class AdvancedSearchComponent implements OnInit {
           caption: 'City',
           tag: 'select',
           class: 'form-control',
+        }
+      ],
+
+      employees: [
+        {
+          name: 'shop',
+          caption: 'Shop Id',
+          tag: 'select',
+          class: 'form-control',
+        },
+        { name: 'role',
+          caption: 'Role',
+          tag: 'input',
+          type: 'text',
+          class: 'form-control'
+        },
+        {
+          name: 'firstName',
+          caption: 'First Name',
+          tag: 'input',
+          type: 'text',
+          class: 'form-control'
+        },
+        {
+          name: 'lastName',
+          caption: 'Last Name',
+          tag: 'input',
+          type: 'text',
+          class: 'form-control'
         }
       ]
     };

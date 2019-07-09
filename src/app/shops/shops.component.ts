@@ -19,12 +19,11 @@ export class ShopsComponent implements OnInit {
   ngOnInit() {
     this.getShops();
 
-    this.eventEmitterService.invokeShopComponentFunction.subscribe((params) => {
-      if (!params['isAdvanced']) {
-        this.getShopsByLiveSearch(params['input']);
-      }
+    this.eventEmitterService.invokeLiveSearchOnShops.subscribe((searchInput) => {
+       this.getShopsByLiveSearch(searchInput);
     });
   }
+
 
   getShops(): void {
     this.shopService.getShops()

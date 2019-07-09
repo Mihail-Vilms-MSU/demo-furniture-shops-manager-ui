@@ -3,7 +3,6 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Shop} from '../model/shop';
 import {environment} from '../../environments/environment';
-import {Product} from '../model/product';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -21,13 +20,15 @@ export class ShopService {
 
   private productsInShopUrl = environment.apiUrl + 'shops/%shopId%/products';
 
+
   getShops(): Observable<Shop[]> {
     return this.http.get<Shop[]>(this.shopsUrl);
   }
 
-  getShopsByLiveSearch(input): Observable<Shop[]> {
+  getShopsByLiveSearch(input: string): Observable<Shop[]> {
     return this.http.get<Shop[]>(this.shopsUrl + '?searchInput=' + input);
   }
+
 
   getShop(shopId: string): Observable<Shop> {
     return this.http.get<Shop>(this.shopsUrl + '/' + shopId);

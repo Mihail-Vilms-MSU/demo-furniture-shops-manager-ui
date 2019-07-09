@@ -1,52 +1,52 @@
 <div class="container">
   <legend>Create new employee record:</legend>
 
-  <form>
-    <div class="form-group row">
-      <div class="col-sm-6">
-        <label for="first-name-field">First name</label>
-        <input type="text" class="form-control" id="first-name-field" name="name-field" #firstName required>
-      </div>
-
-      <div class="col-sm-6">
-        <label for="last-name-field">Last name</label>
-        <input type="text" class="form-control" id="last-name-field" name="type-field" #lastName required>
-      </div>
-    </div>
+  <form class="needs-validation" novalidate>
 
     <div class="form-group row">
-      <div class="col-sm-6">
-        <label for="email-field">Email</label>
-        <input type="text" class="form-control" id="email-field" name="name-field" #email required>
-      </div>
+      <div *ngFor="let fieldInfo of fieldsConfig" class="{{fieldInfo.class}}">
 
-      <div class="col-sm-6">
-        <label for="phone-field">Phone</label>
-        <input type="text" class="form-control" id="phone-field" name="type-field" #phone required>
-      </div>
-    </div>
+        <div *ngIf = "fieldInfo.type == 'input' else selectDiv">
 
-    <div class="form-group row">
-      <div class="col-sm-6">
-        <label for="shop-field">Shop</label>
-        <select class="form-control" id="shop-field" #shop required>
-          <option *ngFor="let shop of shops" [value]="shop.shopId">{{shop.name}}</option>
-        </select>
-      </div>
+          <div class="d-flex">
+            <div class="p-2">
+              <label for="{{fieldInfo.field}}">{{fieldInfo.caption}}</label>
+              <label *ngIf="fieldInfo.required" class="text-danger" for="{{fieldInfo.field}}">*</label>
+            </div>
+            <div class="ml-auto p-2">
+              <div *ngIf="value.invalid && (value.dirty || value.touched)" class="text-danger">
+                <div *ngIf="value.errors.required">Please provide a valid {{fieldInfo.caption}}</div>
+              </div>
+            </div>
+          </div>
 
-      <div class="col-sm-6">
-        <label for="role-field">Role</label>
-        <input type="text" class="form-control" id="role-field" name="type-field" #role required>
+          <input  type="text" class="form-control" id="{{fieldInfo.field}}" name="{{fieldInfo.field}}"
+                  placeholder="{{fieldInfo.placeholder}}" [required]="fieldInfo.required"  [readonly]="fieldInfo.readonly" [(ngModel)]="fieldInfo.value" #value="ngModel">
+        </div>
+
+        <ng-template #selectDiv>
+          <div class="d-flex">
+            <div class="p-2">
+              <label>{{fieldInfo.caption}}</label>
+              <label *ngIf="fieldInfo.required" class="text-danger" for="{{fieldInfo.field}}">*</label>
+            </div>
+            <div class="ml-auto p-2">
+
+            </div>
+          </div>
+
+          <select *ngIf = "fieldInfo.type == 'select'" name="{{fieldInfo.field}}" class="form-control" [required]="fieldInfo.required" [(ngModel)]="fieldInfo.value" #value="ngModel">
+            <option *ngFor="let shop of shops" [value]="shop.shopId">{{shop.name}}</option>
+          </select>
+        </ng-template>
+
       </div>
     </div>
 
     <div class="form-group row">
       <div class="col-sm-4">
-        <button type="submit" class="btn btn-primary btn-lg btn-block"
-                button (click)="add(firstName.value, lastName.value, email.value, phone.value, role.value, shop.value);">Save</button>
+        <button type="submit" class="btn btn-primary btn-lg btn-block" (click)=add()>Save</button>
       </div>
     </div>
-
   </form>
-
 </div>

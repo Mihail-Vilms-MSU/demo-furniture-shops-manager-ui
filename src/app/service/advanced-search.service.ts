@@ -36,14 +36,14 @@ export class AdvancedSearchService {
     const urlConfig = {
       shops: {
         state: {
-        url: '/shops/search-params/state'
-      },
-      city: {
-        url: '/shops/search-params/city',
-        urlParams: [
-          'state'
-        ]
-      }
+          url: '/shops/search-params/state'
+        },
+        city: {
+          url: '/shops/search-params/city',
+          urlParams: [
+            'state'
+          ]
+        }
       }
     };
 

@@ -1,20 +1,30 @@
 import {EventEmitter, Injectable} from '@angular/core';
-import {Subscription} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EventEmitterService {
 
-  invokeShopComponentFunction = new EventEmitter();
+  invokeLiveSearchOnProducts = new EventEmitter();
+  invokeLiveSearchOnShops = new EventEmitter();
+  invokeLiveSearchOnEmployees = new EventEmitter();
+  invokeLiveSearchOnPurchases = new EventEmitter();
 
   constructor() { }
 
-  executeLiveSearch(params: object) {
-    if (params['table'] === 'shops') {
-      this.invokeShopComponentFunction.emit(params);
+  executeLiveSearch(table: string, searchInput: string) {
+    if (table === 'products') {
+      this.invokeLiveSearchOnProducts.emit(searchInput);
+    }
+    if (table === 'shops') {
+      this.invokeLiveSearchOnShops.emit(searchInput);
+    }
+    if (table === 'employees') {
+      this.invokeLiveSearchOnEmployees.emit(searchInput);
+    }
+    if (table === 'purchases') {
+      this.invokeLiveSearchOnPurchases.emit(searchInput);
     }
   }
-
 
 }

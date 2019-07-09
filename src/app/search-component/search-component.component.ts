@@ -10,7 +10,9 @@ import {Router} from '@angular/router';
 
 export class SearchComponentComponent implements OnInit {
   private isAdvancedSearchOn;
+
   private inputValue;
+  private inputValueTemp;
 
   constructor(
     private eventEmitterService: EventEmitterService,
@@ -23,6 +25,13 @@ export class SearchComponentComponent implements OnInit {
 
   switchAdvancedSearchState() {
     this.isAdvancedSearchOn = !this.isAdvancedSearchOn;
+
+    if (this.isAdvancedSearchOn) { // advanced searched turned on
+      this.inputValueTemp = this.inputValue;
+      this.inputValue = '';
+    } else { // advanced search turned off
+      this.inputValue = this.inputValueTemp || '';
+    }
   }
 
   getCurrentTable() {
@@ -31,10 +40,10 @@ export class SearchComponentComponent implements OnInit {
   }
 
   executeSearch() {
-    if (!this.isAdvancedSearchOn) {
-      this.executeLiveSearch();
-    } else {
+    if (this.isAdvancedSearchOn) {
       this.executeAdvancedSearch();
+    } else {
+      this.executeLiveSearch();
     }
   }
 
@@ -43,10 +52,7 @@ export class SearchComponentComponent implements OnInit {
   }
 
   executeLiveSearch() {
-    this.eventEmitterService.executeLiveSearch({
-      isAdvanced: this.isAdvancedSearchOn,
-      input: this.inputValue,
-      table: this.getCurrentTable()
-    });
+    console.log(' ~~~ Live search for table: ' + this.getCurrentTable() + '; inputValue: ' + this.inputValue);
+    this.eventEmitterService.executeLiveSearch(this.getCurrentTable(), this.inputValue);
   }
 }
