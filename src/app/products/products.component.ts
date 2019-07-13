@@ -22,6 +22,7 @@ export class ProductsComponent implements OnInit {
   pages: number[]; // numbers of all pages [1;2...]
 
   inputSearch: string;
+  searchParams;
 
   constructor(
     private productService: ProductService,
@@ -29,15 +30,19 @@ export class ProductsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.getProducts(0, 10, 'name', 'asc', null);
+    this.getProducts(0, 10, 'name', 'asc', null, null);
 
     this.eventEmitterService.invokeLiveSearchOnProducts.subscribe((searchInput) => {
-      this.getProducts(0, this.sizeOfPage, this.sortField, this.sortOrder, searchInput);
+      this.getProducts(0, this.sizeOfPage, this.sortField, this.sortOrder, searchInput, null);
+    });
+
+    this.eventEmitterService.invokeAdvancedSearchOnProducts.subscribe((searchParams) => {
+      this.getProducts(0, this.sizeOfPage, this.sortField, this.sortOrder, null, searchParams);
     });
   }
 
-  getProducts(page, size, sortField, sortOrder, searchInput): void {
-    this.productService.getProducts(page, size, sortField, sortOrder, searchInput)
+  getProducts(page, size, sortField, sortOrder, searchInput, searchParams): void {
+    this.productService.getProducts(page, size, sortField, sortOrder, searchInput, searchParams)
       .subscribe(response => {
         this.products = response['_embedded']['products'];
 
@@ -52,11 +57,12 @@ export class ProductsComponent implements OnInit {
         this.pages = Array.from(Array(this.numberOfPages), (x, index) => index + 1);
 
         this.inputSearch = searchInput;
+        this.searchParams = searchParams;
       });
   }
 
   getAnotherPage(page): void {
-    this.getProducts(page, this.sizeOfPage, this.sortField, this.sortOrder, this.inputSearch);
+    this.getProducts(page, this.sizeOfPage, this.sortField, this.sortOrder, this.inputSearch, this.searchParams);
   }
 
   getAnotherSortOrder(sortField): void {
@@ -65,7 +71,6 @@ export class ProductsComponent implements OnInit {
       sortOrder = 'desc';
     }
 
-    this.getProducts(this.currentPage, this.sizeOfPage, sortField, sortOrder, this.inputSearch);
+    this.getProducts(this.currentPage, this.sizeOfPage, sortField, sortOrder, this.inputSearch, this.searchParams);
   }
-
 }

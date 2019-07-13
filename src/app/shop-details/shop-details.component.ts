@@ -113,4 +113,9 @@ export class ShopDetailsComponent implements OnInit {
     });
   }
 
+  checkShopsStocks():void {
+    const shopId = this.route.snapshot.paramMap.get('id');
+    this.router.navigate(['/shops/' + shopId + '/products']);
+  }
+
 }

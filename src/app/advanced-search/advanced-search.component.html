@@ -7,10 +7,10 @@
       <label>{{field.caption}}</label>
 
       <input *ngIf="field.tag === 'input'" type={{field.type}} class={{field.class}}
-             (change)="executeAdvancedSearch()" [(ngModel)]="searchInput[field.name]">
+             (change)="executeAdvancedSearch()" [(ngModel)]="searchParams[field.name]">
 
       <select *ngIf="field.tag === 'select'" class="form-control"
-              (change)="executeAdvancedSearch()" [(ngModel)]="searchInput[field.name]">
+              (change)="executeAdvancedSearch()" [(ngModel)]="searchParams[field.name]">
         <option *ngFor="let option of field.options" [value]="option">{{option}}</option>
       </select>
 

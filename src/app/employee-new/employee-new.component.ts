@@ -65,9 +65,10 @@ export class EmployeeNewComponent implements OnInit {
     }
   ];
 
-  constructor(private router: Router,
-              private employeeService: EmployeeService,
-              private shopService: ShopService
+  constructor(
+    private router: Router,
+    private employeeService: EmployeeService,
+    private shopService: ShopService
   ) { }
 
   ngOnInit() {
@@ -75,7 +76,7 @@ export class EmployeeNewComponent implements OnInit {
   }
 
   getShops(): void {
-    this.shopService.getShops()
+    this.shopService.getShops(0, 1000, null, null, null, null)
       .subscribe(shopsResponse => {
         this.shops = shopsResponse['_embedded'].shops;
       });

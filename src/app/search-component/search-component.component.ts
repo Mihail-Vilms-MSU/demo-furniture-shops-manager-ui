@@ -40,19 +40,12 @@ export class SearchComponentComponent implements OnInit {
   }
 
   executeSearch() {
-    if (this.isAdvancedSearchOn) {
-      this.executeAdvancedSearch();
-    } else {
+    if (!this.isAdvancedSearchOn) {
       this.executeLiveSearch();
     }
   }
 
-  executeAdvancedSearch() {
-    console.log('in executeAdvancedSearch(): TODO');
-  }
-
   executeLiveSearch() {
-    console.log(' ~~~ Live search for table: ' + this.getCurrentTable() + '; inputValue: ' + this.inputValue);
     this.eventEmitterService.executeLiveSearch(this.getCurrentTable(), this.inputValue);
   }
 }

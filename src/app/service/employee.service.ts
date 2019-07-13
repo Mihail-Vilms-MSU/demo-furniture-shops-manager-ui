@@ -4,7 +4,6 @@ import {ShopService} from './shop.service';
 import {Employee} from '../model/employee';
 import {Observable} from 'rxjs';
 import {environment} from '../../environments/environment';
-import {Shop} from "../model/shop";
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -20,16 +19,27 @@ export class EmployeeService {
 
   private employeeUrl = environment.apiUrl + 'employees';
 
-  private employeesUrl = environment.apiUrl + 'employees?page=%page%&size=%size%&sort=%field%,%order%';
+  private employeesUrl = environment.apiUrl + 'employees%advancedSearch%?page=%page%&size=%size%&sort=%field%,%order%';
 
   private employeesByShopUrl = environment.apiUrl + 'shops/%shopId%/employees';
 
-  getEmployees(page, size, field, order) {
-    return this.http.get(this.composeUrl(page, size, field, order));
-  }
+  getEmployees(page, size, field, order, liveSearchInput, advancedSearchParams) {
+    let url = this.composeUrl(page, size, field, order);
 
-  getEmployeesByLiveSearch(page, size, field, order, input: string) {
-    return this.http.get(this.composeUrl(page, size, field, order) + '&searchInput=' + input);
+    if (advancedSearchParams) {
+      url = url.replace('%advancedSearch%', '/advancedSearch');
+      for (const paramKey in advancedSearchParams) {
+        url += '&' + paramKey + '=' + advancedSearchParams[paramKey];
+      }
+    }
+    url = url.replace('%advancedSearch%', '');
+
+    if (liveSearchInput) {
+      url += '&searchInput=' + liveSearchInput;
+    }
+
+    console.log('url: ' + url);
+    return this.http.get(url);
   }
 
   /**
@@ -57,9 +67,11 @@ export class EmployeeService {
       .replace('%order%', order);
   }
 
+
   getEmployeesByShop(shopId: string) {
     return this.http.get(this.employeesByShopUrl.replace('%shopId%', shopId));
   }
+
 
   getEmployee(employeeId: string): Observable<Employee> {
     return this.http.get<Employee>(this.employeeUrl + '/' + employeeId);

@@ -18,13 +18,24 @@ export class ProductService {
 
   private productUrl = environment.apiUrl + 'products';
 
-  private productsUrl = environment.apiUrl + 'products?page=%page%&size=%size%&sort=%field%,%order%';
+  private productsUrl = environment.apiUrl + 'products%advancedSearch%?page=%page%&size=%size%&sort=%field%,%order%';
 
-  getProducts(page, size, field, order, searchInput) {
+
+  getProducts(page, size, field, order, liveSearchInput, advancedSearchParams) {
     let url = this.composeUrl(page, size, field, order);
-    if (searchInput) {
-      url += '&searchInput=' + searchInput;
+
+    if (advancedSearchParams) {
+      url = url.replace('%advancedSearch%', '/advancedSearch');
+      for (const paramKey in advancedSearchParams) {
+        url += '&' + paramKey + '=' + advancedSearchParams[paramKey];
+      }
     }
+    url = url.replace('%advancedSearch%', '');
+
+    if (liveSearchInput) {
+      url += '&searchInput=' + liveSearchInput;
+    }
+
     console.log('url: ' + url);
     return this.http.get(url);
   }
@@ -53,6 +64,8 @@ export class ProductService {
       .replace('%field%', field)
       .replace('%order%', order);
   }
+
+
 
   getProduct(productId: string): Observable<Product> {
     return this.http.get<Product>(this.productUrl + '/' + productId);

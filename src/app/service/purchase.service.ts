@@ -18,12 +18,14 @@ export class PurchaseService {
 
   private purchaseUrl = environment.apiUrl + 'purchases';
 
-  private purchasesUrl = environment.apiUrl + 'purchases?page=%page%&size=%size%';
+  private purchasesUrl = environment.apiUrl + 'purchases?page=%page%&size=%size%&sort=%field%,%order%';
 
   private newPurchaseUrl = environment.apiUrl + 'purchases?shopId=%shopId%&employeeId=%employeeId%';
 
   getPurchases(page, size, field, order) {
-    return this.http.get(this.composeUrl(page, size, field));
+    let url = this.composeUrl(page, size, field, order);
+    console.log('url: ' + url);
+    return this.http.get(url);
   }
 
   /**
@@ -33,22 +35,22 @@ export class PurchaseService {
    * @param field
    * @param order
    */
-  composeUrl(page, size, field): string {
+  composeUrl(page, size, field, order): string {
     const defaultPage = 0;
-    const defaultSize = 100;
+    const defaultSize = 30;
     const defaultField = 'purchaseId';
     const defaultOrder = 'asc';
 
     page = page ? page : defaultPage;
     size = size ? size : defaultSize;
     field = field ? field : defaultField;
-    // order = order ? order : defaultOrder;
+    order = order ? order : defaultOrder;
 
     return this.purchasesUrl
       .replace('%page%', page)
       .replace('%size%', size)
-      .replace('%field%', field);
-      // .replace('%order%', order);
+      .replace('%field%', field)
+      .replace('%order%', order);
   }
 
   getPurchase(purchaseId: string): Observable<Purchase> {

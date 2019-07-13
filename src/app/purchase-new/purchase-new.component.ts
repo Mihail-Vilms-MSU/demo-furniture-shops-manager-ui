@@ -32,7 +32,7 @@ export class PurchaseNewComponent implements OnInit {
   }
 
   getShops(): void {
-    this.shopService.getShops()
+    this.shopService.getShops(0, 1000, null, null, null, null)
       .subscribe(shopsResponse => {
         this.shops = shopsResponse['_embedded'].shops;
     });

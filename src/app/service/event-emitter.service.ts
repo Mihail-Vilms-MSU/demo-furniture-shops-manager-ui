@@ -10,6 +10,12 @@ export class EventEmitterService {
   invokeLiveSearchOnEmployees = new EventEmitter();
   invokeLiveSearchOnPurchases = new EventEmitter();
 
+  invokeAdvancedSearchOnProducts = new EventEmitter();
+  invokeAdvancedSearchOnShops = new EventEmitter();
+  invokeAdvancedSearchOnEmployees = new EventEmitter();
+  invokeAdvancedSearchOnPurchases = new EventEmitter();
+
+
   constructor() { }
 
   executeLiveSearch(table: string, searchInput: string) {
@@ -24,6 +30,21 @@ export class EventEmitterService {
     }
     if (table === 'purchases') {
       this.invokeLiveSearchOnPurchases.emit(searchInput);
+    }
+  }
+
+  executeAdvancedSearch(table: string, searchParams) {
+    if (table === 'products') {
+      this.invokeAdvancedSearchOnProducts.emit(searchParams);
+    }
+    if (table === 'shops') {
+      this.invokeAdvancedSearchOnShops.emit(searchParams);
+    }
+    if (table === 'employees') {
+      this.invokeAdvancedSearchOnEmployees.emit(searchParams);
+    }
+    if (table === 'purchases') {
+      this.invokeAdvancedSearchOnPurchases.emit(searchParams);
     }
   }
 

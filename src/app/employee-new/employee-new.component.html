@@ -36,7 +36,7 @@
           </div>
 
           <select *ngIf = "fieldInfo.type == 'select'" name="{{fieldInfo.field}}" class="form-control" [required]="fieldInfo.required" [(ngModel)]="fieldInfo.value" #value="ngModel">
-            <option *ngFor="let shop of shops" [value]="shop.shopId">{{shop.name}}</option>
+            <option *ngFor="let shop of shops" [value]="shop.shopId">{{shop.name}}; {{shop.city}}({{shop.state}})</option>
           </select>
         </ng-template>
 
