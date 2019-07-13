@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+  production: true,
+  apiUrl: 'https://blooming-basin-43010.herokuapp.com/'
 };
