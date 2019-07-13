@@ -24,33 +24,83 @@
         <!--Table head-->
         <thead>
           <tr>
-            <th class="th-sm sortable">Shop title</th>
-            <th class="th-sm sortable">City</th>
-            <th class="th-sm sortable">State</th>
-            <th class="th-sm sortable">Address</th>
-            <th class="th-sm sortable">Phone</th>
-            <th class="th-sm sortable">Details</th>
+            <th (click)="getAnotherSortOrder('id')"><button type="button" class="btn btn-link btn-outline-dark">Number</button></th>
+            <th (click)="getAnotherSortOrder('name')"><button type="button" class="btn btn-link btn-outline-dark">Shop title</button></th>
+            <th (click)="getAnotherSortOrder('city')"><button type="button" class="btn btn-link btn-outline-dark">City</button></th>
+            <th (click)="getAnotherSortOrder('state')"><button type="button" class="btn btn-link btn-outline-dark">State</button></th>
+<!--            <th class="th-sm sortable">Address</th>-->
+<!--            <th class="th-sm sortable">Phone</th>-->
           </tr>
         </thead>
 
         <!--Table body-->
         <tbody>
           <tr *ngFor="let shop of shops">
+            <td>
+              <a routerLink="/shops/{{shop.shopId}}">
+                <button type="button" class="btn btn-outline-info btn-sm">{{shop.shopId}}</button>
+              </a>
+            </td>
             <td>{{shop.name}}</td>
             <td>{{shop.city}}</td>
             <td>{{shop.state}}</td>
-            <td>{{shop.address}}</td>
-            <td>{{shop.phone}}</td>
-            <td>
-              <a routerLink="/shops/{{shop.shopId}}">
-                <button type="button" class="btn btn-outline-info btn-sm">Details</button>
-              </a>
-            </td>
+<!--            <td>{{shop.address}}</td>-->
+<!--            <td>{{shop.phone}}</td>-->
           </tr>
         </tbody>
         <!--Table body-->
 
       </table>
+
+
+
+
+      <!--Bottom Table UI-->
+      <div class="d-flex justify-content-left">Current page: {{currentPage + 1}}; Number of pages: {{numberOfPages}}; Total number of records: {{numberOfElements}};  Max number  of records on one page: {{sizeOfPage}}; </div>
+      <div class="d-flex justify-content-center">
+        <!--Pagination -->
+        <nav class="my-4 pt-2">
+          <ul class="pagination pagination-circle pg-blue mb-0">
+            <!--First-->
+            <li>
+              <span class="page-span">
+                <button type="submit" class="page-link" button (click)="getAnotherPage(0);">First</button>
+              </span>
+            </li>
+
+            <!--Arrow left-->
+            <li>
+              <span class="page-span">
+                <button type="submit" class="page-link" button (click)="getAnotherPage(currentPage-1);">&laquo;</button>
+              </span>
+            </li>
+
+            <!--Numbers-->
+            <li *ngFor="let pageNumber of pages" class="page-item">
+              <span class="page-span">
+                <button type="submit" class="page-link" button (click)="getAnotherPage(pageNumber-1);">{{pageNumber}}</button>
+              </span>
+            </li>
+
+            <!--Arrow right-->
+            <li>
+              <span class="page-span">
+                <button type="submit" class="page-link" button (click)="getAnotherPage(currentPage+1);">&raquo;</button>
+              </span>
+            </li>
+
+            <!--Last-->
+            <li>
+              <span class="page-span">
+                <button type="submit" class="page-link" button (click)="getAnotherPage(numberOfPages-1);">Last</button>
+              </span>
+            </li>
+          </ul>
+        </nav>
+        <!--/Pagination -->
+      </div>
+      <!--Bottom Table UI-->
+
 
     </div>
   </div>

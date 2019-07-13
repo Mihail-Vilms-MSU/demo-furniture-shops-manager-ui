@@ -10,31 +10,22 @@ export class HeaderComponent implements OnInit {
 
   constructor() {
     this.menu = [
-      {
-        caption: 'Dashboard',
-        link: 'dashboard',
-        dropDownList: [{
-          caption: 'List of shops',
-          link: 'products'
-        }, {
-          caption: 'Product\'s stocks in shops',
-          link: 'products'
-        }, {
-          caption: 'Create shop record',
-          link: 'shops-new',
-        }]
-      },
+      // {
+      //   caption: 'Dashboard',
+      //   link: 'dashboard',
+      //   dropDownList: [{
+      //     caption: 'List of shops',
+      //     link: 'products'
+      //   }, {
+      //     caption: 'Create shop record',
+      //     link: 'shops-new',
+      //   }]
+      // },
       {
         caption: 'Products',
         link: 'products',
         dropDownList: [{
           caption: 'List of products',
-          link: 'products'
-        }, {
-          caption: 'Products on sale',
-          link: 'products',
-        }, {
-          caption: 'Product\'s stocks in shops',
           link: 'products'
         }, {
           caption: 'Create product record',
@@ -47,9 +38,6 @@ export class HeaderComponent implements OnInit {
         dropDownList: [{
           caption: 'List of shops',
           link: 'shops'
-        }, {
-          caption: 'Product\'s stocks in shops',
-          link: 'products'
         }, {
           caption: 'Create shop record',
           link: 'shop-new',

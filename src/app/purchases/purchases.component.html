@@ -21,28 +21,36 @@
 
         <!--Table head-->
         <thead>
-        <tr>
-          <th class="th-sm sortable">Employee's name</th>
-          <th class="th-sm sortable">Employee's position</th>
-          <th class="th-sm sortable">Shop's title</th>
-          <th class="th-sm sortable">City</th>
-          <th class="th-sm sortable">Info</th>
-        </tr>
+          <tr>
+            <th (click)="getAnotherSortOrder('id')"><button type="button" class="btn btn-link btn-outline-dark">Number</button></th>
+            <th (click)="getAnotherSortOrder('employee.lastName')"><button type="button" class="btn btn-link btn-outline-dark">Employee's name</button></th>
+            <th (click)="getAnotherSortOrder('employee.role')"><button type="button" class="btn btn-link btn-outline-dark">Employee's position</button></th>
+            <th (click)="getAnotherSortOrder('shop.name')"><button type="button" class="btn btn-link btn-outline-dark">Shop</button></th>
+            <th (click)="getAnotherSortOrder('shop.city')"><button type="button" class="btn btn-link btn-outline-dark">City</button></th>
+          </tr>
         </thead>
         <!--Table head-->
 
         <!--Table body-->
         <tbody>
         <tr *ngFor="let purchase of purchases">
-          <td>{{purchase.employee.firstName}} {{purchase.employee.lastName}}</td>
-          <td>{{purchase.employee.role}}</td>
-          <td>{{purchase.shop.name}}</td>
-          <td>{{purchase.shop.city}}</td>
           <td>
             <a routerLink="/purchases/{{purchase.purchaseId}}">
-              <button type="button" class="btn btn-outline-info btn-sm">Info</button>
+              <button type="button" class="btn btn-outline-info btn-sm">{{purchase.purchaseId}}</button>
             </a>
           </td>
+          <td>
+            <a routerLink="/employees/{{purchase.employee.employeeId}}">
+              <button type="button" class="btn btn-outline-info btn-sm">{{purchase.employee.lastName}} {{purchase.employee.firstName}}</button>
+            </a>
+          </td>
+          <td>{{purchase.employee.role}}</td>
+          <td>
+            <a routerLink="/shops/{{purchase.shop.shopId}}">
+              <button type="button" class="btn btn-outline-info btn-sm">{{purchase.shop.name}}</button>
+            </a>
+          </td>
+          <td>{{purchase.shop.city}}</td>
         </tr>
         </tbody>
         <!--Table body-->
@@ -50,6 +58,7 @@
       </table>
 
       <!--Bottom Table UI-->
+      <div class="d-flex justify-content-left">Current page: {{currentPage + 1}}; Number of pages: {{numberOfPages}}; Total number of records: {{numberOfElements}};  Max number  of records on one page: {{sizeOfPage}}; </div>
       <div class="d-flex justify-content-center">
         <!--Pagination -->
         <nav class="my-4 pt-2">
@@ -57,35 +66,35 @@
             <!--First-->
             <li>
               <span class="page-span">
-                <button type="submit" class="page-link" button (click)="getPurchases(0);">First</button>
+                <button type="submit" class="page-link" button (click)="getAnotherPage(0);">First</button>
               </span>
             </li>
 
             <!--Arrow left-->
             <li>
               <span class="page-span">
-                <button type="submit" class="page-link" button (click)="getPurchases(currentPage-1);">&laquo;</button>
+                <button type="submit" class="page-link" button (click)="getAnotherPage(currentPage-1);">&laquo;</button>
               </span>
             </li>
 
             <!--Numbers-->
             <li *ngFor="let pageNumber of pages" class="page-item">
               <span class="page-span">
-                <button type="submit" class="page-link" button (click)="getPurchases(pageNumber-1);">{{pageNumber}}</button>
+                <button type="submit" class="page-link" button (click)="getAnotherPage(pageNumber-1);">{{pageNumber}}</button>
               </span>
             </li>
 
             <!--Arrow right-->
             <li>
               <span class="page-span">
-                <button type="submit" class="page-link" button (click)="getPurchases(currentPage+1);">&raquo;</button>
+                <button type="submit" class="page-link" button (click)="getAnotherPage(currentPage+1);">&raquo;</button>
               </span>
             </li>
 
             <!--Last-->
             <li>
               <span class="page-span">
-                <button type="submit" class="page-link" button (click)="getPurchases(totalPages-1);">Last</button>
+                <button type="submit" class="page-link" button (click)="getAnotherPage(numberOfPages-1);">Last</button>
               </span>
             </li>
           </ul>

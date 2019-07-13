@@ -2,48 +2,93 @@
 
   <legend>Create new product record:</legend>
 
-  <form>
+<!--  <form>-->
+
+<!--    <div class="form-group row">-->
+<!--      <div class="col-sm-6">-->
+<!--        <label for="name-field">Product Title</label>-->
+<!--        <input type="text" class="form-control" id="name-field" name="name-field" #productName required>-->
+<!--      </div>-->
+
+<!--      <div class="col-sm-1"></div>-->
+
+<!--      <div class="col-sm-5">-->
+<!--        <label for="type-field">Category</label>-->
+<!--        <input type="text" class="form-control" id="type-field" name="type-field" #productType required>-->
+<!--      </div>-->
+<!--    </div>-->
+
+<!--    <div class="form-group row">-->
+<!--      <div class="col-sm-6">-->
+<!--        <label for="type-field">Price</label>-->
+<!--        <input type="number" class="form-control" id="price-field" name="type-field" #productPrice required>-->
+<!--      </div>-->
+<!--      <div class="col-sm-6"></div>-->
+<!--    </div>-->
+
+<!--    <div class="form-group row">-->
+<!--      <div class="col-sm-12">-->
+<!--        <label for="body-field">Description</label>-->
+<!--        <textarea id="body-field" name="body-field" class="form-control" #productDescription required></textarea>-->
+<!--      </div>-->
+<!--    </div>-->
+
+<!--    <div class="form-group row">-->
+<!--      <div class="col-sm-4">-->
+<!--        <button type="submit" class="btn btn-primary btn-lg btn-block"-->
+<!--                button (click)="add(productName.value, productType.value, productPrice.value, productDescription.value);-->
+<!--                 productName.value=''; productType.value=''; productPrice.value=''; productDescription.value=''">-->
+<!--          Save-->
+<!--        </button>-->
+<!--      </div>-->
+<!--    </div>-->
+
+<!--  </form>-->
+  <form class="needs-validation" novalidate>
 
     <div class="form-group row">
-      <div class="col-sm-6">
-        <label for="name-field">Product Title</label>
-        <input type="text" class="form-control" id="name-field" name="name-field" #productName required>
-      </div>
+      <div *ngFor="let fieldInfo of fieldsConfig" class="{{fieldInfo.class}}">
 
-      <div class="col-sm-1"></div>
+        <div *ngIf = "fieldInfo.type == 'input' else textAreaDiv">
 
-      <div class="col-sm-5">
-        <label for="type-field">Category</label>
-        <input type="text" class="form-control" id="type-field" name="type-field" #productType required>
-      </div>
-    </div>
+          <div class="d-flex">
+            <div class="p-2">
+              <label for="{{fieldInfo.field}}">{{fieldInfo.caption}}</label>
+              <label *ngIf="fieldInfo.required" class="text-danger" for="{{fieldInfo.field}}">*</label>
+            </div>
+            <div class="ml-auto p-2">
+              <div *ngIf="value.invalid && (value.dirty || value.touched)" class="text-danger">
+                <div *ngIf="value.errors.required">Please provide a valid {{fieldInfo.caption}}</div>
+              </div>
+            </div>
+          </div>
 
-    <div class="form-group row">
-      <div class="col-sm-6">
-        <label for="type-field">Price</label>
-        <input type="number" class="form-control" id="price-field" name="type-field" #productPrice required>
-      </div>
-      <div class="col-sm-6"></div>
-    </div>
+          <input  type="text" class="form-control" id="{{fieldInfo.field}}" name="{{fieldInfo.field}}"
+                  placeholder="{{fieldInfo.placeholder}}" [required]="fieldInfo.required"  [readonly]="fieldInfo.readonly" [(ngModel)]="fieldInfo.value" #value="ngModel">
+        </div>
 
-    <div class="form-group row">
-      <div class="col-sm-12">
-        <label for="body-field">Description</label>
-        <textarea id="body-field" name="body-field" class="form-control" #productDescription required></textarea>
+        <ng-template #textAreaDiv>
+          <div class="d-flex">
+            <div class="p-2">
+              <label>{{fieldInfo.caption}}</label>
+              <label *ngIf="fieldInfo.required" class="text-danger" for="{{fieldInfo.field}}">*</label>
+            </div>
+            <div class="ml-auto p-2">
+
+            </div>
+          </div>
+
+          <textarea name="{{fieldInfo.field}}" class="form-control" [required]="fieldInfo.required" [(ngModel)]="fieldInfo.value" #value="ngModel"></textarea>
+        </ng-template>
+
       </div>
     </div>
 
     <div class="form-group row">
       <div class="col-sm-4">
-        <button type="submit" class="btn btn-primary btn-lg btn-block"
-                button (click)="add(productName.value, productType.value, productPrice.value, productDescription.value);
-                 productName.value=''; productType.value=''; productPrice.value=''; productDescription.value=''">
-          Save
-        </button>
+        <button type="submit" class="btn btn-primary btn-lg btn-block" (click)=add()>Save</button>
       </div>
     </div>
-
   </form>
-
 </div>
 

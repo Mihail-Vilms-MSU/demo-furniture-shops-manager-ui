@@ -101,7 +101,6 @@ export class ShopDetailsComponent implements OnInit {
       });
   }
 
-
   save(): void {
     let jsonShop = {};
 
@@ -112,6 +111,11 @@ export class ShopDetailsComponent implements OnInit {
     this.shopService.saveShop(jsonShop as Shop, this.shop.shopId).subscribe(() => {
       this.router.navigate(['/shops']);
     });
+  }
+
+  checkShopsStocks():void {
+    const shopId = this.route.snapshot.paramMap.get('id');
+    this.router.navigate(['/shops/' + shopId + '/products']);
   }
 
 }

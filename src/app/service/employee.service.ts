@@ -19,12 +19,27 @@ export class EmployeeService {
 
   private employeeUrl = environment.apiUrl + 'employees';
 
-  private employeesUrl = environment.apiUrl + 'employees?page=%page%&size=%size%&sort=%field%,%order%';
+  private employeesUrl = environment.apiUrl + 'employees%advancedSearch%?page=%page%&size=%size%&sort=%field%,%order%';
 
   private employeesByShopUrl = environment.apiUrl + 'shops/%shopId%/employees';
 
-  getEmployees(page, size, field, order) {
-    return this.http.get(this.composeUrl(page, size, field, order));
+  getEmployees(page, size, field, order, liveSearchInput, advancedSearchParams) {
+    let url = this.composeUrl(page, size, field, order);
+
+    if (advancedSearchParams) {
+      url = url.replace('%advancedSearch%', '/advancedSearch');
+      for (const paramKey in advancedSearchParams) {
+        url += '&' + paramKey + '=' + advancedSearchParams[paramKey];
+      }
+    }
+    url = url.replace('%advancedSearch%', '');
+
+    if (liveSearchInput) {
+      url += '&searchInput=' + liveSearchInput;
+    }
+
+    console.log('url: ' + url);
+    return this.http.get(url);
   }
 
   /**
@@ -52,11 +67,27 @@ export class EmployeeService {
       .replace('%order%', order);
   }
 
+
   getEmployeesByShop(shopId: string) {
     return this.http.get(this.employeesByShopUrl.replace('%shopId%', shopId));
   }
 
+
+  getEmployee(employeeId: string): Observable<Employee> {
+    return this.http.get<Employee>(this.employeeUrl + '/' + employeeId);
+  }
+
   addEmployee(employee: Employee, shopId: string): Observable<Employee> {
     return this.http.post<Employee>(this.employeeUrl + '?shopId=' + shopId, employee, httpOptions);
+  }
+
+  saveEmployee(employee: Employee, employeeId: string, shopId: string): Observable<Employee> {
+    let targetUrl = this.employeeUrl + '/' + employeeId;
+
+    if (shopId) {
+      targetUrl += '?shopId=' + shopId;
+    }
+
+    return this.http.put<Employee>(targetUrl, employee, httpOptions);
   }
 }
